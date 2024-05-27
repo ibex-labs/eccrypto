@@ -15,13 +15,13 @@ var crypto = require("crypto");
 // try to use secp256k1, fallback to browser implementation
 try {
   var secp256k1 = require("secp256k1");
-  var ecdh = require("./build/Release/ecdh");
+  var ecdh = require("ecdh");
 } catch (e) {
   if (process.env.ECCRYPTO_NO_FALLBACK) {
     throw e;
   } else {
     console.info('secp256k1 unavailable, reverting to browser version');
-    return (module.exports = require("./browser"));
+    module.exports = require("./browser")
   }
 }
 
